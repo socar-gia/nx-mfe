@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './ProductsList.module.css';
 import { logger } from '@custom-mfe/logger';
+import { useContextProfile, useProfile, useStoreProfile } from '@custom-mfe/store';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 interface Product {
     id: number;
@@ -37,13 +40,27 @@ const mockProducts: Product[] = [
 ];
 
 const ProductsList: React.FC = () => {
+    const { data } = useProfile();
+    const { get } = useStoreProfile();
+    const { profile: contextProfile } = useContextProfile();
+
+    const profile = get();
+
     return (
         <div className={styles.container}>
             <div className={styles.productGrid}>
+                <div>{JSON.stringify(data)}</div>
+                <div>{JSON.stringify(profile)}</div>
+                <div>{JSON.stringify(contextProfile)}</div>
                 {mockProducts.map((product) => (
-                    <div key={product.id} className={styles.productCard} onClick={() => {
-                        logger.logInfo(`You clicked ${product.title}`);
-                    }}>
+                    <Link
+                        key={product.id}
+                        to={`/products/${product.id}`}
+                        className={styles.productCard}
+                        onMouseEnter={() => {
+                            logger.logInfo(`You viewed ${product.title}`);
+                        }}
+                    >
                         <div className={styles.imageContainer}>
                             <img
                                 src={product.imageUrl}
@@ -53,11 +70,19 @@ const ProductsList: React.FC = () => {
                         </div>
                         <h3 className={styles.productTitle}>{product.title}</h3>
                         <p className={styles.productDescription}>{product.description}</p>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
     );
 };
 
-export default ProductsList;
+const queryClient = new QueryClient();
+
+const ProductsListWrapper = () => {
+    return (<QueryClientProvider client={queryClient}>
+        <ProductsList />
+    </QueryClientProvider>)
+}
+
+export default ProductsListWrapper;

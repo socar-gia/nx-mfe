@@ -8,8 +8,25 @@ const config: ModuleFederationConfig = {
     exposes: {
         './Types': './src/types.d.ts',
         './ProductsList': './src/components/ProductsList/ProductsList.tsx',
-        './useTest': './src/components/hooks/useTest.ts'
+        './useTest': './src/components/hooks/useTest.ts',
+        './ProductsRouter': './src/components/ProductsRouter.tsx'
     },
-    shared: ["react", "react-dom"]
+    shared: {
+        "react": {
+            singleton: true
+        },
+        "react-dom": {
+            singleton: true
+        },
+        "@tanstack/react-query": {
+            singleton: true
+        },
+        "@custom-mfe/store": {
+            singleton: true
+        },
+        "react-router-dom": {
+            singleton: true
+        }
+    }
 };
 export default config;

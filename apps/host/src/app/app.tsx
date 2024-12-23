@@ -6,19 +6,21 @@ import type useTest from 'products/useTest';
 import { loadRemote } from "@module-federation/runtime";
 
 export function App() {
-  const RemoteProductsList = useRemote<typeof ProductsListType>({ scope: 'products', module: 'ProductsList' });
+  const RemoteProductsRouter = useRemote<typeof ProductsListType>({ scope: 'products', module: 'ProductsRouter' });
 
-  useEffect(() => {
-    async function doStuff() {
-      const testHookModule = await loadRemote('products/useTest');
-      console.log(testHookModule);
-      //@ts-expect-error
-      const testHook = testHookModule.default as typeof useTest;
-      console.log('Test hook', testHook());
-    }
+  // Potential race condition with registerRemote call in "useRemote"
+  // You must register the remote reliabily before this can be used without error.
+  // useEffect(() => {
+  //   async function doStuff() {
+  //     const testHookModule = await loadRemote('products/useTest');
+  //     console.log(testHookModule);
+  //     //@ts-expect-error
+  //     const testHook = testHookModule.default as typeof useTest;
+  //     console.log('Test hook', testHook());
+  //   }
 
-    doStuff();
-  }, []);
+  //   doStuff();
+  // }, []);
 
   return (
     <div className={styles.container}>
@@ -31,7 +33,7 @@ export function App() {
       </header>
       <main className={styles.content}>
         <div>
-          <RemoteProductsList />
+          <RemoteProductsRouter />
         </div>
       </main>
     </div>

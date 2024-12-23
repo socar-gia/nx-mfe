@@ -1,18 +1,15 @@
+export type LogLevel = 'info' | 'error';
+
+export interface LogEvent {
+  timestamp: string;
+  level: LogLevel;
+  message: string;
+  data?: unknown;
+}
+
 const logger = (function () {
-  // Private types
-  type LogLevel = 'info' | 'error';
-
-  interface LogEvent {
-    timestamp: string;
-    level: LogLevel;
-    message: string;
-    data?: unknown;
-  }
-
-  // Private constants
   const LOG_EVENT = 'app:log';
 
-  // Private methods
   function createLogEvent(level: LogLevel, message: string, data?: unknown): LogEvent {
     return {
       timestamp: new Date().toISOString(),

@@ -36,6 +36,9 @@
     },
     "serve": {
       "executor": "@nx/rspack:dev-server",
+      "dependsOn": [
+        "^build"
+      ],
       "options": {
         "buildTarget": "host:build:development",
         "port": 4200

@@ -5,6 +5,22 @@ type ModuleFederationConfig = ConstructorParameters<typeof ModuleFederationPlugi
 const config: ModuleFederationConfig = {
     name: 'host',
     filename: 'remoteEntry.js',
-    shared: ["react", "react-dom"],
+    shared: {
+        "react": {
+            singleton: true
+        },
+        "react-dom": {
+            singleton: true
+        },
+        "@tanstack/react-query": {
+            singleton: true
+        },
+        "@custom-mfe/store": {
+            singleton: true
+        },
+        "react-router-dom": {
+            singleton: true
+        }
+    }
 };
 export default config;
