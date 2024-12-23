@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ProductsList.module.css';
+import { logger } from '@custom-mfe/logger';
 
 interface Product {
     id: number;
@@ -40,7 +41,9 @@ const ProductsList: React.FC = () => {
         <div className={styles.container}>
             <div className={styles.productGrid}>
                 {mockProducts.map((product) => (
-                    <div key={product.id} className={styles.productCard}>
+                    <div key={product.id} className={styles.productCard} onClick={() => {
+                        logger.logInfo(`You clicked ${product.title}`);
+                    }}>
                         <div className={styles.imageContainer}>
                             <img
                                 src={product.imageUrl}

@@ -7,7 +7,8 @@ const config: ModuleFederationConfig = {
     filename: 'remoteEntry.js',
     exposes: {
         './Types': './src/types.d.ts',
-        './ProductsList': './src/components/ProductsList/ProductsList.tsx'
+        './ProductsList': './src/components/ProductsList/ProductsList.tsx',
+        './useTest': './src/components/hooks/useTest.ts'
     },
     shared: ["react", "react-dom"]
 };

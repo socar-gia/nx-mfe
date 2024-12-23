@@ -1,9 +1,24 @@
+import { lazy, useEffect } from "react";
 import useRemote from "../hooks/useRemote";
 import styles from './app.module.css';
 import type ProductsListType from 'products/ProductsList';
+import type useTest from 'products/useTest';
+import { loadRemote } from "@module-federation/runtime";
 
 export function App() {
   const RemoteProductsList = useRemote<typeof ProductsListType>({ scope: 'products', module: 'ProductsList' });
+
+  useEffect(() => {
+    async function doStuff() {
+      const testHookModule = await loadRemote('products/useTest');
+      console.log(testHookModule);
+      //@ts-expect-error
+      const testHook = testHookModule.default as typeof useTest;
+      console.log('Test hook', testHook());
+    }
+
+    doStuff();
+  }, []);
 
   return (
     <div className={styles.container}>

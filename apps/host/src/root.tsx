@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 import { init } from '@module-federation/runtime';
 import App from './app/app';
 import './styles.css';
+import Layout from './layout';
 
 init({
     name: 'host',
@@ -14,6 +15,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <StrictMode>
-        <App />
+        <Layout>
+            <App />
+        </Layout>
     </StrictMode>
 );
