@@ -2,7 +2,7 @@ import { composePlugins, withNx, withReact } from '@nx/rspack';
 import mfConfig from './module-federation.config';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 
-module.exports = composePlugins(withNx(), withReact(), (config) => {
+module.exports = composePlugins(withNx(), withReact(), (config, ctx) => {
   config.plugins?.push(new ModuleFederationPlugin(mfConfig));
 
   config.output = {

@@ -4,6 +4,7 @@ import styles from './ProductsList.module.css';
 import { logger } from '@custom-mfe/logger';
 import { useContextProfile, useProfile, useStoreProfile } from '@custom-mfe/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Components } from '@custom-mfe/components';
 
 interface Product {
     id: number;
@@ -50,8 +51,7 @@ const ProductsList: React.FC = () => {
         <div className={styles.container}>
             <div className={styles.productGrid}>
                 <div>{JSON.stringify(data)}</div>
-                <div>{JSON.stringify(profile)}</div>
-                <div>{JSON.stringify(contextProfile)}</div>
+                <Components />
                 {mockProducts.map((product) => (
                     <Link
                         key={product.id}
