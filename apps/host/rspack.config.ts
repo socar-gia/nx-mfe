@@ -1,4 +1,5 @@
 import { composePlugins, withNx, withReact } from '@nx/rspack';
+import { DefinePlugin } from '@rspack/core';
 import mfConfig from './module-federation.config';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 import * as path from 'path';
@@ -17,3 +18,4 @@ export default composePlugins(withNx(), withReact(), (config, ctx) => {
 
   return config;
 });
+
