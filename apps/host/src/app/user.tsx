@@ -1,5 +1,4 @@
 import { useContextProfile, useProfile, useStoreProfile, } from '@custom-mfe/store';
-import { Link } from 'react-router-dom';
 
 export default function User() {
     const { data } = useProfile();
@@ -10,18 +9,18 @@ export default function User() {
 
     return (
         <>
-            <div>User Profile: {JSON.stringify(data)}</div>
-            <div>Store User Profile: {JSON.stringify(storeProfile)}</div>
-            <div>Context User Profile: {JSON.stringify(profile)}</div>
+            <div>사용자 프로필: {JSON.stringify(data)}</div>
+            <div>스토어 사용자 프로필: {JSON.stringify(storeProfile)}</div>
+            <div>컨텍스트 사용자 프로필: {JSON.stringify(profile)}</div>
             <button type="button" onClick={() => {
                 set({
                     id: crypto.randomUUID(),
-                    name: 'Store Joe User'
+                    name: '스토어 사용자'
                 })
                 setProfile({
                     id: crypto.randomUUID(),
-                    name: 'Context Joe User'
+                    name: '컨텍스트 사용자'
                 })
-            }}>Mutate Store Profile</button>
+            }}>프로필 변경</button>
         </>)
 }

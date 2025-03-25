@@ -11,7 +11,7 @@ const config: ModuleFederationConfig = {
         provideExternalRuntime: true
     },
     remotes: {
-        "products": "products@http://localhost:4201/mf-manifest.json"
+        "products": `products@${process.env.NX_PRODUCTS_URL || "http://localhost:4201/mf-manifest.json"}`
     },
     shared: {
         "react": {

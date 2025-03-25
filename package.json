@@ -8,13 +8,13 @@
   "private": true,
   "pnpm": {
     "overrides": {
-      "@module-federation/enhanced": "0.8.7",
-      "@module-federation/runtime": "0.8.7"
+      "@module-federation/enhanced": "0.8.3",
+      "@module-federation/runtime": "0.8.3"
     }
   },
   "dependencies": {
-    "@module-federation/enhanced": "0.8.7",
-    "@module-federation/runtime": "0.8.7",
+    "@module-federation/enhanced": "0.8.3",
+    "@module-federation/runtime": "0.8.3",
     "@tanstack/react-query": "^5.62.9",
     "react": "18.3.1",
     "react-dom": "18.3.1",

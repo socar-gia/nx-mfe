@@ -7,12 +7,16 @@ module.exports = composePlugins(withNx(), withReact(), (config, ctx) => {
 
   config.output = {
     ...config.output,
-    publicPath: 'auto'
+    publicPath: 'auto',
+    clean: true
   }
 
   config.devServer = {
     ...config.devServer,
-    host: '127.0.0.1'
+    host: '127.0.0.1',
+    hot: true,
+    liveReload: true,
+    static: false
   }
 
   return config;

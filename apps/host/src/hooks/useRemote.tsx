@@ -9,7 +9,7 @@ export type RemoteDetails = {
 
 export async function loadRemoteFromService(scope: string) {
     const remoteMap: Record<string, string> = {
-        "products": "http://localhost:4201/mf-manifest.json"
+        "products": process.env.NX_PRODUCTS_URL || "http://localhost:4201/mf-manifest.json"
     }
 
     return Promise.resolve(remoteMap[scope]);
@@ -27,10 +27,11 @@ export default function useRemote<T = unknown>({ scope, module }: RemoteDetails)
         return loadRemote<T>(`${scope}/${module}`) as unknown as Promise<{ default: ComponentType<T> }>
     });
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
     return (props: any) => (
-        <ErrorBoundary fallback={<div>Ut oh!</div>}>
-            <Suspense fallback={<div>Loading...</div>}>
+        <ErrorBoundary fallback={<div>오류가 발생했습니다!</div>}>
+            <Suspense fallback={<div>로딩 중...</div>}>
                 <LazyComponent {...props} />
             </Suspense>
         </ErrorBoundary>

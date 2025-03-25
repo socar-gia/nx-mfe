@@ -1,12 +1,9 @@
-import { lazy, useEffect } from "react";
 import useRemote from "../hooks/useRemote";
 import styles from './app.module.css';
 import type ProductsListType from 'products/ProductsList';
-import type useTest from 'products/useTest';
-import { loadRemote } from "@module-federation/runtime";
 
 export function App() {
-  const RemoteProductsRouter = useRemote<typeof ProductsListType>({ scope: 'products', module: 'ProductsRouter' });
+  const RemoteProductsRouter = useRemote<typeof ProductsListType>({ scope: 'products', module: ' ' });
 
   // Potential race condition with registerRemote call in "useRemote"
   // You must register the remote reliabily before this can be used without error.
@@ -25,10 +22,10 @@ export function App() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>MFE Demo Store</h1>
+        <h1 className={styles.title}>마이크로 프론트엔드 데모 스토어</h1>
         <p className={styles.description}>
-          Welcome to our demo store powered by Micro Frontends. Browse through our selection of products
-          loaded dynamically from a remote application.
+          마이크로 프론트엔드로 구동되는 데모 스토어에 오신 것을 환영합니다. 
+          원격 애플리케이션에서 동적으로 로드되는 상품 목록을 둘러보세요.
         </p>
       </header>
       <main className={styles.content}>
